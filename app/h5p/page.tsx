@@ -1,9 +1,10 @@
 import React from "react";
+import H5P from "../components/H5P";
 
 type Props = {};
 
 const page = (props: Props) => {
-	return <div>page</div>;
+	return <H5P />;
 };
 
 export default page;
