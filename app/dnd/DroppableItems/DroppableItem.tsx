@@ -1,11 +1,9 @@
 "use client";
 import React from "react";
 import { useDrag } from "react-dnd";
+import { DroppableItem } from "../Reduxdata";
 
-type Props = {
-	id: Number;
-	name: string;
-};
+type Props = DroppableItem;
 
 const DroppableItem = ({ name, id }: Props) => {
 	const [{ isDragging }, drag] = useDrag(() => ({

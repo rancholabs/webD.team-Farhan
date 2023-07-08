@@ -1,12 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { counterSlice } from "./slice/CounterSlice";
-import answerCollectorSlice from "./slice/AnswerCollectorSlice";
+// import answerCollectorSlice from "./slice/AnswerCollectorSlice";
 import { enableMapSet } from "immer";
+import DndSlice from "./slice/DndSlice";
 enableMapSet();
 
 export const store = configureStore({
 	reducer: {
-		answerCollector: answerCollectorSlice.reducer,
+		// answerCollector: answerCollectorSlice.reducer,
+		dndSlice: DndSlice.reducer,
 	},
 });
 

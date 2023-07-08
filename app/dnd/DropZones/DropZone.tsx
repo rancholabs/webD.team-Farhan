@@ -1,22 +1,19 @@
 "use client";
 import React, { useState } from "react";
-import { DropZoneType, DroppableItemType, DroppableItems } from "../data";
 import { useDrop } from "react-dnd";
 import { useAppDispatch, useAppSelector } from "@/app/redux Toolkit/hooks";
-import { setAnswer } from "@/app/redux Toolkit/slice/AnswerCollectorSlice";
+import { DropZone, DroppableItem, DroppableItems } from "../Reduxdata";
+import { setDropZones } from "@/app/redux Toolkit/slice/DndSlice";
 
-interface Props extends DropZoneType {}
+type Props = DropZone;
 
-const DropZone = ({ expectedId, answer, id, coordinates }: Props) => {
-	// const answersSet = useAppSelector(
-	// 	(state: RootState) => state.answerCollector.answers
-	// );
+const DropZone = ({ id, color }: Props) => {
 	const dispatch = useAppDispatch();
-	const [board, setBoard] = useState<DroppableItemType>();
+	const [board, setBoard] = useState<DroppableItem>();
 	const [{ isOver }, drop] = useDrop({
 		accept: "card",
 		drop: (item: any) => {
-			addItemToBoard({ id: item.id });
+			addItemToBoard(item.id);
 		},
 		collect: (monitor) => ({
 			isOver: !!monitor.isOver(),
@@ -25,18 +22,16 @@ const DropZone = ({ expectedId, answer, id, coordinates }: Props) => {
 
 	const addItemToBoard = (droppedItemId: any) => {
 		const droppedItem = DroppableItems.find(
-			(item) => item.id === droppedItemId.id
+			(item) => item.id === droppedItemId
 		);
 		setBoard(droppedItem);
-		dispatch(
-			setAnswer({ index: id - 1, item: droppedItem as DroppableItemType })
-		);
+		dispatch(setDropZones({ index: id, droppedId: droppedItemId }));
 	};
 
 	return (
 		<div
-			className="w-[200px] h-12 min-w-fit px-5 py-3 flex justify-center items-center 
-			bg-slate-600 text-white font-semibold"
+			className={`w-[200px] h-12 min-w-fit px-5 py-3 flex justify-center items-center 
+			bg-slate-600 font-semibold ${color ? color : "text-white"}`}
 			ref={drop}>
 			{board?.name}
 		</div>

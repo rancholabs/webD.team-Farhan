@@ -1,11 +1,14 @@
 "use client";
 import React, { useState } from "react";
 import DroppableItem from "./DroppableItem";
-import { DroppableItems } from "../data";
+import { useAppSelector } from "@/app/redux Toolkit/hooks";
 
 type Props = {};
 
 const DroppableItemsConatiner = (props: Props) => {
+	const DroppableItems = useAppSelector(
+		(state) => state.dndSlice.droppableItems
+	);
 	return (
 		<div className="w-full flex items-center justify-between">
 			{DroppableItems.map((item) => {
