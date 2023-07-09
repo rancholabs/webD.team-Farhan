@@ -1,22 +1,41 @@
 "use client";
 import React, { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../redux Toolkit/hooks";
-import { checkScore, resetDropZones } from "../redux Toolkit/slice/DndSlice";
+import {
+	checkScore,
+	resetDropZones,
+	setError,
+} from "../redux Toolkit/slice/DndSlice";
+import { RootState } from "../redux Toolkit/store";
 
 type Props = {};
 
 const ValidationDiv = (props: Props) => {
 	const dispatch = useAppDispatch();
-	const score = useAppSelector((state) => state.dndSlice.Validation.score);
+	const score = useAppSelector(
+		(state: RootState) => state.dndSlice.Validation.score
+	);
 	const correctAnswers = useAppSelector(
 		(state) => state.dndSlice.Validation.correct
 	);
 	const wrongAnswers = useAppSelector(
 		(state) => state.dndSlice.Validation.wrong
 	);
-	const hasSubmitted = useAppSelector((state) => state.dndSlice.hasSubmitted);
+	const hasSubmitted = useAppSelector(
+		(state: RootState) => state.dndSlice.hasSubmitted
+	);
+	const dropZones = useAppSelector(
+		(state: RootState) => state.dndSlice.dropZones
+	);
+	const error = useAppSelector((state: RootState) => state.dndSlice.error);
 
 	const submithandler = () => {
+		for (let i = 0; i < dropZones.length; i++) {
+			if (dropZones[i].droppedId === null) {
+				dispatch(setError({ error: "Fill all the blocks" }));
+				return;
+			}
+		}
 		dispatch(checkScore());
 	};
 
@@ -32,7 +51,8 @@ const ValidationDiv = (props: Props) => {
 					</span>
 				</div>
 				<button
-					className="mt-5 w-4/5 font-semibold border-2 border-slate-500 rounded text-slate-700 py-2"
+					className="mt-5 w-4/5 font-semibold border-2 border-slate-500 rounded text-slate-700 py-2
+					disbaled:bg-slate-300 disabled:text-slate-500 disabled:cursor-not-allowed"
 					onClick={submithandler}
 					disabled={hasSubmitted}>
 					Submit
@@ -44,6 +64,7 @@ const ValidationDiv = (props: Props) => {
 					}}>
 					Reset
 				</button>
+				<span>{error}</span>
 			</div>
 		</div>
 	);

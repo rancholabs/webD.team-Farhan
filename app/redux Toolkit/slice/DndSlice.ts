@@ -14,6 +14,7 @@ const initialState = {
 		wrong: 0,
 	},
 	hasSubmitted: false,
+	error: "",
 };
 
 const DndSlice = createSlice({
@@ -33,6 +34,7 @@ const DndSlice = createSlice({
 			state.Validation.score = 0;
 			state.Validation.correct = 0;
 			state.Validation.wrong = 0;
+			state.error = "";
 		},
 		checkScore: (state) => {
 			for (let i = 0; i < state.dropZones.length; i++) {
@@ -50,19 +52,13 @@ const DndSlice = createSlice({
 			}
 			state.hasSubmitted = true;
 		},
-		// setDroppedItem: (
-		// 	state,
-		// 	action: PayloadAction<{
-		// 		index: number;
-		// 		droppedItem: DroppableItem | null | undefined;
-		// 	}>
-		// ) => {
-		// 	state.dropZones[action.payload.index - 1].droppedItem =
-		// 		action.payload.droppedItem;
-		// },
+		setError: (state, action: PayloadAction<{ error: string }>) => {
+			state.error = action.payload.error;
+		},
 	},
 });
 
-export const { setDropZones, checkScore, resetDropZones } = DndSlice.actions;
+export const { setDropZones, checkScore, resetDropZones, setError } =
+	DndSlice.actions;
 
 export default DndSlice;
