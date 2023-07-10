@@ -1,12 +1,12 @@
 "use client";
 import React, { useState } from "react";
-import { useAppDispatch, useAppSelector } from "../redux Toolkit/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux Toolkit/hooks";
 import {
 	checkScore,
 	resetDropZones,
 	setError,
-} from "../redux Toolkit/slice/DndSlice";
-import { RootState } from "../redux Toolkit/store";
+} from "../../redux Toolkit/slice/DndSlice";
+import { RootState } from "../../redux Toolkit/store";
 
 type Props = {};
 

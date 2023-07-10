@@ -1,5 +1,5 @@
 import React from "react";
-import DndProviderContext from "../context/DndProviderContext";
+import DndProviderContext from "../utils/context/DndProviderContext";
 
 type Props = {};
 

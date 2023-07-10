@@ -1,5 +1,5 @@
-import NavBar from "./components/NavBar";
-import ReduxToolkitContext from "./context/ReduxToolkitContext";
+import NavBar from "./utils/components/NavBar";
+import ReduxToolkitContext from "./utils/context/ReduxToolkitContext";
 import "./globals.css";
 import { Inter } from "next/font/google";
 

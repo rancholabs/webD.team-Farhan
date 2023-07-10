@@ -2,9 +2,9 @@
 import React from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import DroppableItemsConatiner from "../dnd/DroppableItems/DroppableItemsConatiner";
-import DropZonesContainer from "../dnd/DropZones/DropZonesContainer";
-import ValidationDiv from "../dnd/ValidationDiv";
+import DroppableItemsConatiner from "../../dnd/DroppableItems/DroppableItemsConatiner";
+import DropZonesContainer from "../../dnd/DropZones/DropZonesContainer";
+import ValidationDiv from "../../dnd/ValidationDiv/ValidationDiv";
 
 type Props = {};
 

@@ -22,6 +22,9 @@ const NavBar = (props: Props) => {
 				<li>
 					<Link href={`/dnd`}>Drag And Drop</Link>
 				</li>
+				<li>
+					<Link href={`/imagechoice`}>Image Choice</Link>
+				</li>
 			</ul>
 		</div>
 	);
