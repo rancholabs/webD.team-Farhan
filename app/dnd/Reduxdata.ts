@@ -9,6 +9,7 @@ export interface DropZone {
 	droppedId: number | null;
 	coordinates: string;
 	color: string | null;
+	droppableItem?: DroppableItem;
 }
 
 export const DropZonesData: DropZone[] = [

@@ -23,18 +23,25 @@ const DndSlice = createSlice({
 	reducers: {
 		setDropZones: (
 			state,
-			action: PayloadAction<{ index: number; droppedId: number }>
+			action: PayloadAction<{
+				index: number;
+				droppedId: number;
+				droppedItem: DroppableItem;
+			}>
 		) => {
 			state.dropZones[action.payload.index - 1].droppedId =
 				action.payload.droppedId;
+			state.dropZones[action.payload.index - 1].droppableItem =
+				action.payload.droppedItem;
 		},
 		resetDropZones: (state) => {
 			state.dropZones = DropZonesData;
+			state.droppableItems = DroppableItems;
+			state.error = "";
 			state.hasSubmitted = false;
 			state.Validation.score = 0;
 			state.Validation.correct = 0;
 			state.Validation.wrong = 0;
-			state.error = "";
 		},
 		checkScore: (state) => {
 			for (let i = 0; i < state.dropZones.length; i++) {

@@ -7,7 +7,7 @@ import { setDropZones } from "@/app/redux Toolkit/slice/DndSlice";
 
 type Props = DropZone;
 
-const DropZone = ({ id, color }: Props) => {
+const DropZone = ({ id, color, droppableItem }: Props) => {
 	const dispatch = useAppDispatch();
 	const [board, setBoard] = useState<DroppableItem>();
 	const [{ isOver }, drop] = useDrop({
@@ -24,8 +24,13 @@ const DropZone = ({ id, color }: Props) => {
 		const droppedItem = DroppableItems.find(
 			(item) => item.id === droppedItemId
 		);
-		setBoard(droppedItem);
-		dispatch(setDropZones({ index: id, droppedId: droppedItemId }));
+		dispatch(
+			setDropZones({
+				index: id,
+				droppedId: droppedItemId,
+				droppedItem: droppedItem!,
+			})
+		);
 	};
 
 	return (
@@ -33,7 +38,7 @@ const DropZone = ({ id, color }: Props) => {
 			className={`w-[200px] h-12 min-w-fit px-5 py-3 flex justify-center items-center 
 			bg-slate-600 font-semibold ${color ? color : "text-white"}`}
 			ref={drop}>
-			{board?.name}
+			{droppableItem?.name}
 		</div>
 	);
 };

@@ -27,6 +27,7 @@ const DropZonesContainer = (props: Props) => {
 							droppedId={item.droppedId}
 							coordinates={item.coordinates}
 							color={item.color}
+							droppableItem={item.droppableItem}
 						/>
 					</div>
 				);
