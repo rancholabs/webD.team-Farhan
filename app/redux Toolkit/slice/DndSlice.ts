@@ -65,6 +65,13 @@ const DndSlice = createSlice({
 	},
 });
 
+export const selectDropZones = (state: any) => state.dropZones.dropZones;
+export const selectDroppableItems = (state: any) =>
+	state.dropZones.droppableItems;
+export const selectValidation = (state: any) => state.dropZones.Validation;
+export const selectHasSubmitted = (state: any) => state.dropZones.hasSubmitted;
+export const selectError = (state: any) => state.dropZones.error;
+
 export const { setDropZones, checkScore, resetDropZones, setError } =
 	DndSlice.actions;
 

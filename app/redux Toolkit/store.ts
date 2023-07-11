@@ -2,12 +2,13 @@ import { configureStore } from "@reduxjs/toolkit";
 // import answerCollectorSlice from "./slice/AnswerCollectorSlice";
 import { enableMapSet } from "immer";
 import DndSlice from "./slice/DndSlice";
+import ImageChoiceSlice from "./slice/ImageChoiceSlice";
 enableMapSet();
 
 export const store = configureStore({
 	reducer: {
-		// answerCollector: answerCollectorSlice.reducer,
 		dndSlice: DndSlice.reducer,
+		ImageChoiceSlice: ImageChoiceSlice.reducer,
 	},
 });
 
