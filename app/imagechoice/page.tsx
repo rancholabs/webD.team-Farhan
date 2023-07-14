@@ -1,12 +1,13 @@
 import React from "react";
-import ImageChoice from "./ImageChoice";
+import ImageChoiceSlide from "./ImageChoiceSlide";
+import ImageChoiceCarousel from "./ImageChoiceCarousel";
 
 type Props = {};
 
 const page = (props: Props) => {
 	return (
 		<div className="w-full h-full">
-			<ImageChoice />
+			<ImageChoiceCarousel />
 		</div>
 	);
 };

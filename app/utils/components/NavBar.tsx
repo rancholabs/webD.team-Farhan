@@ -25,6 +25,9 @@ const NavBar = (props: Props) => {
 				<li>
 					<Link href={`/imagechoice`}>Image Choice</Link>
 				</li>
+				<li>
+					<Link href={`/fillintheblanks`}>Fill In the Blanks</Link>
+				</li>
 			</ul>
 		</div>
 	);
