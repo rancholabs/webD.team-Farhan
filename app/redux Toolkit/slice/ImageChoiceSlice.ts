@@ -13,28 +13,6 @@ const initialState: inititalData = {
 	error: "",
 };
 
-// export const fetchImages = createAsyncThunk(
-// 	"imageChoice/fetchImages",
-// 	async (_, thunkAPI) => {
-// 		try {
-// 			const res = await fetch("https://picsum.photos/v2/list?limit=8");
-// 			const data = await res.json();
-// 			const imagesData: ImageDataInterface[] = data.map((image: any) => {
-// 				return {
-// 					id: image.id,
-// 					alt: image.author,
-// 					url: image.download_url,
-// 					correct: true,
-// 					selected: false,
-// 				};
-// 			});
-// 			return imagesData as ImageDataInterface[];
-// 		} catch (err: any) {
-// 			return thunkAPI.rejectWithValue({ error: err.message });
-// 		}
-// 	}
-// );
-
 const ImageChoiceSlice = createSlice({
 	name: "imageChoice",
 	initialState,
@@ -97,35 +75,8 @@ const ImageChoiceSlice = createSlice({
 						.wrong++;
 				}
 			}
-
-			// for (let i = 0; i < state.images.length; i++) {
-			// 	if (state.images[i].selected === state.images[i].correct) {
-			// 		state.images[i].color = "border-4 border-green-500";
-			// 		state.images[i].selected = false;
-			// 		state.validationImageChoice.score++;
-			// 		state.validationImageChoice.correct++;
-			// 	} else {
-			// 		state.images[i].color = "border-4 border-red-500";
-			// 		state.validationImageChoice.wrong++;
-			// 	}
-			// }
 		},
 	},
-	// extraReducers(builder) {
-	// 	builder
-	// 		.addCase(
-	// 			fetchImages.fulfilled,
-	// 			(state, action: PayloadAction<ImageDataInterface[]>) => {
-	// 				state.images = action.payload;
-	// 			}
-	// 		)
-	// 		.addCase(fetchImages.rejected, (state, action) => {
-	// 			state.error = action.error.message!;
-	// 		})
-	// 		.addCase(fetchImages.pending, (state, action) => {
-	// 			state.error = "";
-	// 		});
-	// },
 });
 
 export const selectImageChoiceGameData = (state: RootState) =>
@@ -137,3 +88,41 @@ export const { setSelected, checkScoreForImageChoice, resetSelectedSlide } =
 	ImageChoiceSlice.actions;
 
 export default ImageChoiceSlice;
+
+// export const fetchImages = createAsyncThunk(
+// 	"imageChoice/fetchImages",
+// 	async (_, thunkAPI) => {
+// 		try {
+// 			const res = await fetch("https://picsum.photos/v2/list?limit=8");
+// 			const data = await res.json();
+// 			const imagesData: ImageDataInterface[] = data.map((image: any) => {
+// 				return {
+// 					id: image.id,
+// 					alt: image.author,
+// 					url: image.download_url,
+// 					correct: true,
+// 					selected: false,
+// 				};
+// 			});
+// 			return imagesData as ImageDataInterface[];
+// 		} catch (err: any) {
+// 			return thunkAPI.rejectWithValue({ error: err.message });
+// 		}
+// 	}
+// );
+
+// extraReducers(builder) {
+// 	builder
+// 		.addCase(
+// 			fetchImages.fulfilled,
+// 			(state, action: PayloadAction<ImageDataInterface[]>) => {
+// 				state.images = action.payload;
+// 			}
+// 		)
+// 		.addCase(fetchImages.rejected, (state, action) => {
+// 			state.error = action.error.message!;
+// 		})
+// 		.addCase(fetchImages.pending, (state, action) => {
+// 			state.error = "";
+// 		});
+// },

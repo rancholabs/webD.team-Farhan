@@ -3,12 +3,14 @@ import { configureStore } from "@reduxjs/toolkit";
 import { enableMapSet } from "immer";
 import DndSlice from "./slice/DndSlice";
 import ImageChoiceSlice from "./slice/ImageChoiceSlice";
+import FIBSlice from "./slice/FIBSlice";
 enableMapSet();
 
 export const store = configureStore({
 	reducer: {
 		dndSlice: DndSlice.reducer,
 		ImageChoiceSlice: ImageChoiceSlice.reducer,
+		FIBSlice: FIBSlice.reducer,
 	},
 });
 
