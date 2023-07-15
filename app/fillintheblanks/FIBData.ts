@@ -5,6 +5,10 @@ export interface FIBDataInterface {
 		index: number;
 		answer: string;
 	}[];
+	submittedAnswers: {
+		index: number;
+		answer: string;
+	}[];
 	validationFIB: {
 		score: number;
 		correct: number;
@@ -22,6 +26,7 @@ export const FIBGameData: FIBDataInterface[] = [
 			wrong: 0,
 			correct: 0,
 		},
+		submittedAnswers: [],
 		// givenAnswers: [],
 	},
 	{
@@ -42,6 +47,7 @@ export const FIBGameData: FIBDataInterface[] = [
 			wrong: 0,
 			correct: 0,
 		},
+		submittedAnswers: [],
 		// givenAnswers: [],
 	},
 ];
