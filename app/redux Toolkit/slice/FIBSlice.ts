@@ -63,7 +63,10 @@ const FIBSlice = createSlice({
 					(ans) => ans.index === answer.index
 				);
 				if (index !== -1) {
-					if (answers[index].answer === answer.answer) {
+					if (
+						answers[index].answer.toLowerCase() ===
+						answer.answer.toLowerCase()
+					) {
 						score += 1;
 						correct += 1;
 					} else {
