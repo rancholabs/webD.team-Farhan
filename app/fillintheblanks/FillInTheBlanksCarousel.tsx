@@ -25,6 +25,7 @@ const FillInTheBlanksCarousel = (props: Props) => {
 				answers={FIBGameData[currentSlide].answers}
 				id={FIBGameData[currentSlide].id}
 				validationFIB={FIBGameData[currentSlide].validationFIB}
+				submittedAnswers={FIBGameData[currentSlide].submittedAnswers}
 			/>
 		</CarouselContext>
 	);
