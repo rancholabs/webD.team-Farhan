@@ -77,11 +77,24 @@ const FIBSlice = createSlice({
 				wrong,
 			};
 		},
+		resetFIBGame: (
+			state,
+			action: PayloadAction<{ slideIndex: number }>
+		) => {
+			const { slideIndex } = action.payload;
+			state.FIBGameData[slideIndex].submittedAnswers = [];
+			state.FIBGameData[slideIndex].validationFIB = {
+				score: 0,
+				correct: 0,
+				wrong: 0,
+			};
+		},
 	},
 });
 
 export const getFIBData = (state: RootState) => state.FIBSlice.FIBGameData;
 
-export const { setFIBanswers, checkFIBanswers } = FIBSlice.actions;
+export const { setFIBanswers, checkFIBanswers, resetFIBGame } =
+	FIBSlice.actions;
 
 export default FIBSlice;

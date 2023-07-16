@@ -27,7 +27,6 @@ export const FIBGameData: FIBDataInterface[] = [
 			correct: 0,
 		},
 		submittedAnswers: [],
-		// givenAnswers: [],
 	},
 	{
 		id: 1,
@@ -48,6 +47,5 @@ export const FIBGameData: FIBDataInterface[] = [
 			correct: 0,
 		},
 		submittedAnswers: [],
-		// givenAnswers: [],
 	},
 ];

@@ -3,7 +3,11 @@ import React, { useState } from "react";
 import { FIBDataInterface } from "./FIBData";
 import Blank from "./Blank";
 import { useAppDispatch, useAppSelector } from "../redux Toolkit/hooks";
-import { checkFIBanswers, getFIBData } from "../redux Toolkit/slice/FIBSlice";
+import {
+	checkFIBanswers,
+	getFIBData,
+	resetFIBGame,
+} from "../redux Toolkit/slice/FIBSlice";
 
 type Props = FIBDataInterface & { slideIndex: number };
 
@@ -39,15 +43,13 @@ const FillInTheBlanksSlide = ({ question, slideIndex }: Props) => {
 				<button
 					onClick={() => {
 						dispatch(checkFIBanswers({ slideIndex: slideIndex }));
-						// checkScoreForImageChoice({ index: slideIndex })
 					}}
 					className="bg-slate-500 text-white px-5 py-2 rounded-md">
 					Submit
 				</button>
-				{/* reset button */}
 				<button
 					onClick={() => {
-						// dispatch(resetSelectedSlide({ index: slideIndex }));
+						dispatch(resetFIBGame({ slideIndex: slideIndex }));
 					}}
 					className="bg-slate-500 text-white px-5 py-2 rounded-md ml-5">
 					Reset
