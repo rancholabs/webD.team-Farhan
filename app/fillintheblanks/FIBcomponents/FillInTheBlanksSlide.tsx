@@ -1,13 +1,13 @@
 "use client";
 import React, { useState } from "react";
-import { FIBDataInterface } from "./FIBData";
 import Blank from "./Blank";
-import { useAppDispatch, useAppSelector } from "../redux Toolkit/hooks";
+import { useAppDispatch, useAppSelector } from "@/app/redux Toolkit/hooks";
+import { FIBDataInterface } from "../FIBData";
 import {
 	checkFIBanswers,
 	getFIBData,
 	resetFIBGame,
-} from "../redux Toolkit/slice/FIBSlice";
+} from "@/app/redux Toolkit/slice/FIBSlice";
 
 type Props = FIBDataInterface & { slideIndex: number };
 

@@ -1,13 +1,13 @@
 "use client";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import { ImageChoiceGameInterface, ImageDataInterface } from "./ImagesData";
-import { useAppDispatch, useAppSelector } from "../redux Toolkit/hooks";
+import { ImageChoiceGameInterface, ImageDataInterface } from "../ImagesData";
+import { useAppDispatch } from "@/app/redux Toolkit/hooks";
 import {
 	checkScoreForImageChoice,
 	resetSelectedSlide,
 	setSelected,
-} from "../redux Toolkit/slice/ImageChoiceSlice";
+} from "@/app/redux Toolkit/slice/ImageChoiceSlice";
 
 type Props = ImageChoiceGameInterface & { slideIndex: number };
 

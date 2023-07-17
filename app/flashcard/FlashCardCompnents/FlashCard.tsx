@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { FlashCardData } from "./FlashCardData";
+import { FlashCardData } from "../FlashCardData";
 
 type Props = FlashCardData;
 

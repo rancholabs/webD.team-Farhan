@@ -1,5 +1,5 @@
 import React from "react";
-import FillInTheBlanksCarousel from "./FillInTheBlanksCarousel";
+import FillInTheBlanksCarousel from "./FIBcomponents/FillInTheBlanksCarousel";
 
 type Props = {};
 

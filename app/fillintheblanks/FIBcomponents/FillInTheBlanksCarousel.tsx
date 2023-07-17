@@ -1,10 +1,9 @@
 "use client";
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { useAppSelector } from "../redux Toolkit/hooks";
-import { getFIBData } from "../redux Toolkit/slice/FIBSlice";
-import CarouselContext from "../utils/context/CarouselContext";
 import FillInTheBlanksSlide from "./FillInTheBlanksSlide";
+import { useAppSelector } from "@/app/redux Toolkit/hooks";
+import { getFIBData } from "@/app/redux Toolkit/slice/FIBSlice";
+import CarouselContext from "@/app/utils/context/CarouselContext";
 
 type Props = {};
 
