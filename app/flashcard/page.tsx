@@ -1,5 +1,5 @@
 import React from "react";
-import FlashCardsList from "./FlashCardsList";
+import FlashCardsList from "./FlashCardCompnents/FlashCardsList";
 
 type Props = {};
 

@@ -1,9 +1,9 @@
 "use client";
 import React, { useState } from "react";
-import { useAppSelector } from "../redux Toolkit/hooks";
-import { selectImageChoiceGameData } from "../redux Toolkit/slice/ImageChoiceSlice";
+import { useAppSelector } from "../../redux Toolkit/hooks";
+import { selectImageChoiceGameData } from "../../redux Toolkit/slice/ImageChoiceSlice";
 import ImageChoiceSlide from "./ImageChoiceSlide";
-import CarouselContext from "../utils/context/CarouselContext";
+import CarouselContext from "../../utils/context/CarouselContext";
 
 type Props = {};
 

@@ -1,5 +1,5 @@
 import React from "react";
-import { data } from "./FlashCardData";
+import { data } from "../FlashCardData";
 import FlashCard from "./FlashCard";
 
 type Props = {};

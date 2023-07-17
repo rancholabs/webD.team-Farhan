@@ -1,6 +1,6 @@
 import React from "react";
 import ImageChoiceSlide from "./ImageChoiceSlide";
-import ImageChoiceCarousel from "./ImageChoiceCarousel";
+import ImageChoiceCarousel from "./ImageChoiceComponents/ImageChoiceCarousel";
 
 type Props = {};
 

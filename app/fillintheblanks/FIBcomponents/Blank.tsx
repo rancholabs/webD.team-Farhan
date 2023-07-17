@@ -1,8 +1,8 @@
 "use client";
 import React, { InputHTMLAttributes, useEffect, useState } from "react";
-import { useAppDispatch, useAppSelector } from "../redux Toolkit/hooks";
-import { setFIBanswers } from "../redux Toolkit/slice/FIBSlice";
-import { RootState } from "../redux Toolkit/store";
+import { useAppDispatch, useAppSelector } from "../../redux Toolkit/hooks";
+import { setFIBanswers } from "../../redux Toolkit/slice/FIBSlice";
+import { RootState } from "../../redux Toolkit/store";
 
 type Props = {
 	index: number;
