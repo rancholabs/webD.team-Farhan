@@ -6,11 +6,13 @@ import { stat } from "fs";
 interface initialState {
 	FIBGameData: FIBDataInterface[];
 	error: string;
+	hasreset: boolean;
 }
 
 const initialState: initialState = {
 	FIBGameData,
 	error: "",
+	hasreset: false,
 };
 
 const FIBSlice = createSlice({
@@ -91,6 +93,7 @@ const FIBSlice = createSlice({
 				correct: 0,
 				wrong: 0,
 			};
+			state.hasreset = true;
 		},
 	},
 });
