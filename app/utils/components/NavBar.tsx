@@ -28,6 +28,9 @@ const NavBar = (props: Props) => {
 				<li>
 					<Link href={`/fillintheblanks`}>Fill In the Blanks</Link>
 				</li>
+				<li>
+					<Link href={`/fibdnd`}>Fill In the Blanks / DND</Link>
+				</li>
 			</ul>
 		</div>
 	);

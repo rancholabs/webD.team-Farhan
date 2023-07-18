@@ -9,7 +9,6 @@ type Props = {};
 
 const FillInTheBlanksCarousel = (props: Props) => {
 	const FIBGameData = useAppSelector(getFIBData);
-	console.log("FIBGameData: ", FIBGameData);
 	const [[currentSlide, direction], setCurrentSlide] = useState([0, 0]);
 
 	return (

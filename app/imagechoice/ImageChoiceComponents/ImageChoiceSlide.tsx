@@ -65,7 +65,6 @@ const ImageChoiceSlide = ({
 											slideIndex: slideIndex,
 										})
 									);
-									console.log("clicked");
 								}}
 								className={`w-full h-full cursor-pointer hover:opacity-70 dashed transition-all shadow
 							${

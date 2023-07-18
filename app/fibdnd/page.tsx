@@ -1,14 +1,14 @@
 import React from "react";
+import FibDndCarousel from "./fibdndComponents/FibDndCarousel";
 import DndProviderContext from "../utils/context/DndProviderContext";
-import DNDContainer from "./DNDContainer";
 
 type Props = {};
 
 const page = (props: Props) => {
 	return (
-		<div className="w-full h-full flex justify-center items-center">
+		<div className="w-full h-full overflow-hidden">
 			<DndProviderContext>
-				<DNDContainer />
+				<FibDndCarousel />
 			</DndProviderContext>
 		</div>
 	);

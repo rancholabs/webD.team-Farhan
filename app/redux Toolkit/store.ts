@@ -4,6 +4,7 @@ import { enableMapSet } from "immer";
 import DndSlice from "./slice/DndSlice";
 import ImageChoiceSlice from "./slice/ImageChoiceSlice";
 import FIBSlice from "./slice/FIBSlice";
+import FIBDndSlice from "./slice/FIBDndSlice";
 enableMapSet();
 
 export const store = configureStore({
@@ -11,6 +12,7 @@ export const store = configureStore({
 		dndSlice: DndSlice.reducer,
 		ImageChoiceSlice: ImageChoiceSlice.reducer,
 		FIBSlice: FIBSlice.reducer,
+		FIBDNDSlice: FIBDndSlice.reducer,
 	},
 });
 

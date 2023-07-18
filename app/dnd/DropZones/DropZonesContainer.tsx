@@ -1,11 +1,14 @@
 import React from "react";
 import DropZone from "./DropZone";
 import { useAppSelector } from "@/app/redux Toolkit/hooks";
+import { RootState } from "@/app/redux Toolkit/store";
 
 type Props = {};
 
 const DropZonesContainer = (props: Props) => {
-	const DropZones = useAppSelector((state) => state.dndSlice.dropZones);
+	const DropZones = useAppSelector(
+		(state: RootState) => state.dndSlice.dropZones
+	);
 
 	return (
 		<div
