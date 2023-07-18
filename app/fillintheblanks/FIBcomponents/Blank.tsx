@@ -24,7 +24,8 @@ const Blank = ({ index, slideIndex }: Props) => {
 
 	return (
 		<input
-			className="shadow-2xl shadow-blue-400"
+			className="shadow-2xl shadow-blue-400 bg-transparent outline-none border-b border-dashed border-black
+			text-center"
 			onChange={(e) => {
 				setWord(e.target.value);
 			}}
