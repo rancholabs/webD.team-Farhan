@@ -1,42 +1,45 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import { useAppDispatch, useAppSelector } from "../../redux Toolkit/hooks";
 import {
-	checkScore,
-	resetDropZones,
-	setError,
+	checkDNDScore,
+	getDNDGameData,
+	resetDNDDropZones,
+	setDNDError,
 } from "../../redux Toolkit/slice/DndSlice";
-import { RootState } from "../../redux Toolkit/store";
+import SubmitButton from "@/app/utils/components/SubmitButton";
+import ResetButton from "@/app/utils/components/ResetButton";
 
-type Props = {};
+type Props = {
+	slideIndex: number;
+};
 
-const ValidationDiv = (props: Props) => {
+const ValidationDiv = ({ slideIndex }: Props) => {
 	const dispatch = useAppDispatch();
-	const score = useAppSelector(
-		(state: RootState) => state.dndSlice.Validation.score
-	);
-	const correctAnswers = useAppSelector(
-		(state) => state.dndSlice.Validation.correct
-	);
-	const wrongAnswers = useAppSelector(
-		(state) => state.dndSlice.Validation.wrong
-	);
-	const hasSubmitted = useAppSelector(
-		(state: RootState) => state.dndSlice.hasSubmitted
-	);
-	const dropZones = useAppSelector(
-		(state: RootState) => state.dndSlice.dropZones
-	);
-	const error = useAppSelector((state: RootState) => state.dndSlice.error);
+	const DNDGameData = useAppSelector(getDNDGameData);
+	const Validation = DNDGameData[slideIndex].Validation;
+	const hasSubmitted = DNDGameData[slideIndex].hasSubmitted;
+	const error = DNDGameData[slideIndex].error;
 
 	const submithandler = () => {
-		for (let i = 0; i < dropZones.length; i++) {
-			if (dropZones[i].droppedId === null) {
-				dispatch(setError({ error: "Fill all the blocks" }));
-				return;
-			}
+		console.log("clicked");
+		if (
+			DNDGameData[slideIndex].submittedAnswers.length <
+			DNDGameData[slideIndex].answers.length
+		) {
+			dispatch(
+				setDNDError({
+					slideIndex: slideIndex,
+					error: "Please fill all the dropzones",
+				})
+			);
+			return;
 		}
-		dispatch(checkScore());
+		dispatch(
+			checkDNDScore({
+				slideIndex: slideIndex,
+			})
+		);
 	};
 
 	return (
@@ -47,23 +50,22 @@ const ValidationDiv = (props: Props) => {
 				<span className="text-xl font-bold">Score</span>
 				<div className="border-2 border-slate-500 rounded-full p-10 relative flex justify-center items-center">
 					<span className="absolute text-xl text-slate-700 font-semibold">
-						{score}
+						{Validation.score}
 					</span>
 				</div>
-				<button
-					className="mt-5 w-4/5 font-semibold border-2 border-slate-500 rounded text-slate-700 py-2
-					disbaled:bg-slate-300 disabled:text-slate-500 disabled:cursor-not-allowed"
+				<SubmitButton
+					hasSubmitted={hasSubmitted}
 					onClick={submithandler}
-					disabled={hasSubmitted}>
-					Submit
-				</button>
-				<button
-					className="w-4/5 font-semibold border-2 border-slate-500 rounded text-slate-700 py-2"
+				/>
+				<ResetButton
 					onClick={() => {
-						dispatch(resetDropZones());
-					}}>
-					Reset
-				</button>
+						dispatch(
+							resetDNDDropZones({
+								slideIndex: slideIndex,
+							})
+						);
+					}}
+				/>
 				<span>{error}</span>
 			</div>
 		</div>

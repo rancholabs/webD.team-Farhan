@@ -9,7 +9,7 @@ enableMapSet();
 
 export const store = configureStore({
 	reducer: {
-		dndSlice: DndSlice.reducer,
+		DNDSlice: DndSlice.reducer,
 		ImageChoiceSlice: ImageChoiceSlice.reducer,
 		FIBSlice: FIBSlice.reducer,
 		FIBDNDSlice: FIBDndSlice.reducer,

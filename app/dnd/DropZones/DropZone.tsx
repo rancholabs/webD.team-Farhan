@@ -1,44 +1,57 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDrop } from "react-dnd";
 import { useAppDispatch, useAppSelector } from "@/app/redux Toolkit/hooks";
-import { DropZone, DroppableItem, DroppableItems } from "../Reduxdata";
-import { setDropZones } from "@/app/redux Toolkit/slice/DndSlice";
+import { DropZoneInterface } from "@/app/utils/interfaces/DNDinterface";
+import {
+	getDNDGameData,
+	setDNDDropZones,
+} from "@/app/redux Toolkit/slice/DndSlice";
 
-type Props = DropZone;
+type Props = DropZoneInterface & { slideIndex: number };
 
-const DropZone = ({ id, color, droppableItem }: Props) => {
+const DropZone = ({ index, color, slideIndex }: Props) => {
+	const DNDGameData = useAppSelector(getDNDGameData);
+	const reset = DNDGameData[slideIndex].reset;
 	const dispatch = useAppDispatch();
-	const [board, setBoard] = useState<DroppableItem>();
+	const [board, setBoard] = useState<string>("");
 	const [{ isOver }, drop] = useDrop({
 		accept: "card",
-		drop: (item: any) => {
-			addItemToBoard(item.id);
+		drop: ({ answer }: any) => {
+			addItemToBoard(answer);
+			setBoard(answer);
 		},
 		collect: (monitor) => ({
 			isOver: !!monitor.isOver(),
 		}),
 	});
 
-	const addItemToBoard = (droppedItemId: any) => {
-		const droppedItem = DroppableItems.find(
-			(item) => item.id === droppedItemId
-		);
+	const addItemToBoard = (answer: string) => {
+		console.log("answer", answer);
 		dispatch(
-			setDropZones({
-				index: id,
-				droppedId: droppedItemId,
-				droppedItem: droppedItem!,
+			setDNDDropZones({
+				slideIndex: slideIndex,
+				submittedAnswer: {
+					index: index,
+					answer: answer,
+				},
 			})
 		);
 	};
+
+	useEffect(() => {
+		if (reset) {
+			setBoard("");
+			return;
+		}
+	}, [reset]);
 
 	return (
 		<div
 			className={`w-[200px] h-12 min-w-fit px-5 py-3 flex justify-center items-center 
 			bg-slate-600 font-semibold ${color ? color : "text-white"}`}
 			ref={drop}>
-			{droppableItem?.name}
+			{board ? board : null}
 		</div>
 	);
 };

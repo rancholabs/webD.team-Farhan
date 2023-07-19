@@ -2,21 +2,24 @@
 import React, { useState } from "react";
 import DroppableItem from "./DroppableItem";
 import { useAppSelector } from "@/app/redux Toolkit/hooks";
+import { getDNDGameData } from "@/app/redux Toolkit/slice/DndSlice";
 
-type Props = {};
+type Props = {
+	slideIndex: number;
+};
 
-const DroppableItemsConatiner = (props: Props) => {
-	const DroppableItems = useAppSelector(
-		(state) => state.dndSlice.droppableItems
-	);
+const DroppableItemsConatiner = ({ slideIndex }: Props) => {
+	const DNDGameData = useAppSelector(getDNDGameData);
+	const droppableItems = DNDGameData[slideIndex].droppableItems;
+
 	return (
 		<div className="w-full flex items-center justify-between">
-			{DroppableItems.map((item) => {
+			{droppableItems.map((item) => {
 				return (
 					<DroppableItem
-						key={item.id}
+						key={item.index}
 						name={item.name}
-						id={item.id}
+						index={item.index}
 					/>
 				);
 			})}

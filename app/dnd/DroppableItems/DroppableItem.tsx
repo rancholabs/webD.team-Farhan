@@ -1,14 +1,14 @@
 "use client";
+import { DroppableItemInterface } from "@/app/utils/interfaces/DNDinterface";
 import React from "react";
 import { useDrag } from "react-dnd";
-import { DroppableItem } from "../Reduxdata";
 
-type Props = DroppableItem;
+type Props = DroppableItemInterface;
 
-const DroppableItem = ({ name, id }: Props) => {
+const DroppableItem = ({ name }: Props) => {
 	const [{ isDragging }, drag] = useDrag(() => ({
 		type: "card",
-		item: { id: id },
+		item: { answer: name },
 		collect: (monitor) => ({
 			isDragging: !!monitor.isDragging(),
 		}),

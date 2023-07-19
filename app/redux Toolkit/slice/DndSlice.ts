@@ -1,78 +1,105 @@
-import {
-	DropZonesData,
-	DroppableItem,
-	DroppableItems,
-} from "@/app/dnd/Reduxdata";
+import { DragAndDropGameData } from "@/app/utils/data/DragAndDropData";
+import { DNDGameDataInterface } from "@/app/utils/interfaces/DNDinterface";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { RootState } from "../store";
 
-const initialState = {
-	dropZones: DropZonesData,
-	droppableItems: DroppableItems,
-	Validation: {
-		score: 0,
-		correct: 0,
-		wrong: 0,
-	},
-	hasSubmitted: false,
-	error: "",
+interface initialStateInterface {
+	DragAndDropGameData: DNDGameDataInterface[];
+}
+
+const initialState: initialStateInterface = {
+	DragAndDropGameData: DragAndDropGameData,
 };
 
 const DndSlice = createSlice({
 	name: "dropZones",
 	initialState,
 	reducers: {
-		setDropZones: (
+		setDNDDropZones: (
 			state,
 			action: PayloadAction<{
-				index: number;
-				droppedId: number;
-				droppedItem: DroppableItem;
+				slideIndex: number;
+				submittedAnswer: {
+					index: number;
+					answer: string;
+				};
 			}>
 		) => {
-			state.dropZones[action.payload.index - 1].droppedId =
-				action.payload.droppedId;
-			state.dropZones[action.payload.index - 1].droppableItem =
-				action.payload.droppedItem;
+			const { slideIndex, submittedAnswer } = action.payload;
+			state.DragAndDropGameData[slideIndex].submittedAnswers;
+			if (submittedAnswer.answer === "") return;
+			const index = state.DragAndDropGameData[
+				slideIndex
+			].submittedAnswers.findIndex(
+				(answer) => answer.index === submittedAnswer.index
+			);
+			if (index !== -1) {
+				state.DragAndDropGameData[slideIndex].submittedAnswers[index] =
+					submittedAnswer;
+			} else {
+				state.DragAndDropGameData[slideIndex].submittedAnswers.push(
+					submittedAnswer
+				);
+			}
+			state.DragAndDropGameData[slideIndex].reset = false;
 		},
-		resetDropZones: (state) => {
-			state.dropZones = DropZonesData;
-			state.droppableItems = DroppableItems;
-			state.error = "";
-			state.hasSubmitted = false;
-			state.Validation.score = 0;
-			state.Validation.correct = 0;
-			state.Validation.wrong = 0;
+		resetDNDDropZones: (
+			state,
+			action: PayloadAction<{ slideIndex: number }>
+		) => {
+			const { slideIndex } = action.payload;
+			state.DragAndDropGameData[slideIndex].reset = true;
+			state.DragAndDropGameData[slideIndex].submittedAnswers = [];
+			let Validation = {
+				score: 0,
+				correct: 0,
+				wrong: 0,
+			};
+			state.DragAndDropGameData[slideIndex].Validation = Validation;
+			state.DragAndDropGameData[slideIndex].hasSubmitted = false;
+			state.DragAndDropGameData[slideIndex].error = "";
 		},
-		checkScore: (state) => {
-			for (let i = 0; i < state.dropZones.length; i++) {
+		checkDNDScore: (
+			state,
+			action: PayloadAction<{ slideIndex: number }>
+		) => {
+			const { slideIndex } = action.payload;
+			for (
+				let i = 0;
+				i < state.DragAndDropGameData[slideIndex].answers.length;
+				i++
+			) {
 				if (
-					state.dropZones[i].expectedId ===
-					state.dropZones[i].droppedId
+					state.DragAndDropGameData[slideIndex].answers[i].answer ===
+					state.DragAndDropGameData[slideIndex].submittedAnswers[i]
+						.answer
 				) {
-					state.dropZones[i].color = "text-green-500";
-					state.Validation.score++;
-					state.Validation.correct++;
+					state.DragAndDropGameData[slideIndex].Validation.score++;
+					state.DragAndDropGameData[slideIndex].Validation.correct++;
 				} else {
-					state.dropZones[i].color = "text-red-500";
-					state.Validation.wrong++;
+					state.DragAndDropGameData[slideIndex].Validation.wrong++;
 				}
 			}
-			state.hasSubmitted = true;
+			state.DragAndDropGameData[slideIndex].hasSubmitted = true;
 		},
-		setError: (state, action: PayloadAction<{ error: string }>) => {
-			state.error = action.payload.error;
+		setDNDError: (
+			state,
+			action: PayloadAction<{ slideIndex: number; error: string }>
+		) => {
+			const { slideIndex, error } = action.payload;
+			state.DragAndDropGameData[slideIndex].error = error;
 		},
 	},
 });
 
-export const selectDropZones = (state: any) => state.dropZones.dropZones;
-export const selectDroppableItems = (state: any) =>
-	state.dropZones.droppableItems;
-export const selectValidation = (state: any) => state.dropZones.Validation;
-export const selectHasSubmitted = (state: any) => state.dropZones.hasSubmitted;
-export const selectError = (state: any) => state.dropZones.error;
+export const getDNDGameData = (state: RootState) =>
+	state.DNDSlice.DragAndDropGameData;
 
-export const { setDropZones, checkScore, resetDropZones, setError } =
-	DndSlice.actions;
+export const {
+	setDNDDropZones,
+	resetDNDDropZones,
+	checkDNDScore,
+	setDNDError,
+} = DndSlice.actions;
 
 export default DndSlice;
