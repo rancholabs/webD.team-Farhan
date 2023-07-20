@@ -1,9 +1,28 @@
+## Overview
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
-To get started download the node_modules using the following command:
+### Prerequisites
+
+Make sure you have the following software installed on your system:
+
+- [Node.js](https://nodejs.org/en/download/) (at least version 12.x or higher)
+- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
+
+### Clone the Repository
+
+First, clone this repository to your local machine using the following command:
 
 ```bash
+git clone https://github.com/rancholabs/webD.team-Farhan.git
+```
+
+## Install Dependencies
+
+Change into the project directory and install the required dependencies:
+
+```bash
+cd webD.team-Farhan
 npm install
 # or
 yarn
@@ -11,7 +30,10 @@ yarn
 pnpm
 ```
 
-First, run the development server:
+## Start the Development Server
+
+After installing the dependencies, you can run the development server:
+
 
 ```bash
 npm run dev
@@ -21,9 +43,9 @@ yarn dev
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The development server will be up and running at http://localhost:3000. Open this URL in your browser to view the application.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+You can start editing the page by modifying app/page.tsx. The page will auto-update as you make changes to the file.
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
