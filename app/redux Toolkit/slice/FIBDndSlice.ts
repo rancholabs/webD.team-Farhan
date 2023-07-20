@@ -46,6 +46,7 @@ const FIBDndSlice = createSlice({
 					answerSubmitted
 				);
 			}
+			state.hasreset = false;
 		},
 		checkFIBDNDanswers: (
 			state,

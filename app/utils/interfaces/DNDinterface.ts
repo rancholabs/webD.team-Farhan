@@ -18,11 +18,11 @@ export interface DNDGameDataInterface {
 		wrong: number;
 	};
 	answers: {
-		index: number;
+		dropZoneIndex: number;
 		answer: string;
 	}[];
 	submittedAnswers: {
-		index: number;
+		dropZoneIndex: number;
 		answer: string;
 	}[];
 	imgUrl: string;

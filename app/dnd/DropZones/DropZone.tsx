@@ -32,7 +32,7 @@ const DropZone = ({ index, color, slideIndex }: Props) => {
 			setDNDDropZones({
 				slideIndex: slideIndex,
 				submittedAnswer: {
-					index: index,
+					dropZoneIndex: index,
 					answer: answer,
 				},
 			})

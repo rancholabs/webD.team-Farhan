@@ -20,7 +20,7 @@ const DndSlice = createSlice({
 			action: PayloadAction<{
 				slideIndex: number;
 				submittedAnswer: {
-					index: number;
+					dropZoneIndex: number;
 					answer: string;
 				};
 			}>
@@ -31,7 +31,8 @@ const DndSlice = createSlice({
 			const index = state.DragAndDropGameData[
 				slideIndex
 			].submittedAnswers.findIndex(
-				(answer) => answer.index === submittedAnswer.index
+				(answer) =>
+					answer.dropZoneIndex === submittedAnswer.dropZoneIndex
 			);
 			if (index !== -1) {
 				state.DragAndDropGameData[slideIndex].submittedAnswers[index] =
@@ -58,28 +59,52 @@ const DndSlice = createSlice({
 			state.DragAndDropGameData[slideIndex].Validation = Validation;
 			state.DragAndDropGameData[slideIndex].hasSubmitted = false;
 			state.DragAndDropGameData[slideIndex].error = "";
+			state.DragAndDropGameData[slideIndex].dropZones.map(
+				(dropZone) => (dropZone.color = "")
+			);
 		},
 		checkDNDScore: (
 			state,
 			action: PayloadAction<{ slideIndex: number }>
 		) => {
 			const { slideIndex } = action.payload;
-			for (
-				let i = 0;
-				i < state.DragAndDropGameData[slideIndex].answers.length;
-				i++
-			) {
-				if (
-					state.DragAndDropGameData[slideIndex].answers[i].answer ===
-					state.DragAndDropGameData[slideIndex].submittedAnswers[i]
-						.answer
-				) {
-					state.DragAndDropGameData[slideIndex].Validation.score++;
-					state.DragAndDropGameData[slideIndex].Validation.correct++;
-				} else {
-					state.DragAndDropGameData[slideIndex].Validation.wrong++;
+			state.DragAndDropGameData[slideIndex].submittedAnswers.forEach(
+				(submittedAnswer) => {
+					const answers =
+						state.DragAndDropGameData[slideIndex].answers;
+					const submittedAnswers =
+						state.DragAndDropGameData[slideIndex].submittedAnswers;
+					const index = answers.findIndex(
+						(ans) =>
+							ans.dropZoneIndex === submittedAnswer.dropZoneIndex
+					);
+
+					let score = 0;
+					let correct = 0;
+					let wrong = 0;
+					if (index !== -1) {
+						if (answers[index].answer === submittedAnswer.answer) {
+							score++;
+							correct++;
+							// change the colour of the dropzone to green
+							state.DragAndDropGameData[slideIndex].dropZones[
+								submittedAnswer.dropZoneIndex - 1
+							].color = "text-green-500";
+						} else {
+							wrong++;
+							// change the colour of the dropzone to red
+							state.DragAndDropGameData[slideIndex].dropZones[
+								submittedAnswer.dropZoneIndex - 1
+							].color = "text-red-500";
+						}
+					}
+					state.DragAndDropGameData[slideIndex].Validation = {
+						score,
+						correct,
+						wrong,
+					};
 				}
-			}
+			);
 			state.DragAndDropGameData[slideIndex].hasSubmitted = true;
 		},
 		setDNDError: (

@@ -6,7 +6,6 @@ import {
 } from "@/app/redux Toolkit/slice/FIBDndSlice";
 import React, { useEffect, useState } from "react";
 import { useDrop } from "react-dnd";
-import { text } from "stream/consumers";
 
 type Props = {
 	index: number;

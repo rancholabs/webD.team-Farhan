@@ -81,35 +81,35 @@ export const DragAndDropGameData: DNDGameDataInterface[] = [
 		submittedAnswers: [],
 		answers: [
 			{
-				index: 1,
+				dropZoneIndex: 1,
 				answer: "USB Port",
 			},
 			{
-				index: 2,
+				dropZoneIndex: 2,
 				answer: "USB to serial chip",
 			},
 			{
-				index: 3,
+				dropZoneIndex: 3,
 				answer: "Digital Pins",
 			},
 			{
-				index: 4,
+				dropZoneIndex: 4,
 				answer: "Microcontroller",
 			},
 			{
-				index: 5,
+				dropZoneIndex: 5,
 				answer: "Analog Pins",
 			},
 			{
-				index: 6,
+				dropZoneIndex: 6,
 				answer: "5V/3.3V",
 			},
 			{
-				index: 7,
+				dropZoneIndex: 7,
 				answer: "GND",
 			},
 			{
-				index: 8,
+				dropZoneIndex: 8,
 				answer: "VIN",
 			},
 		],
@@ -166,19 +166,19 @@ export const DragAndDropGameData: DNDGameDataInterface[] = [
 		],
 		answers: [
 			{
-				index: 1,
+				dropZoneIndex: 1,
 				answer: "USB Port",
 			},
 			{
-				index: 2,
+				dropZoneIndex: 2,
 				answer: "USB to serial chip",
 			},
 			{
-				index: 3,
+				dropZoneIndex: 3,
 				answer: "Digital Pins",
 			},
 			{
-				index: 4,
+				dropZoneIndex: 4,
 				answer: "Microcontroller",
 			},
 		],
