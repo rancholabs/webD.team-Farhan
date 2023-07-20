@@ -2,7 +2,6 @@ export interface DroppableItemInterface {
 	index: number;
 	name: string;
 }
-
 export interface FIBDNDDataInterface {
 	id: number;
 	question: (string | null)[];
