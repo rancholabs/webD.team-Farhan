@@ -30,7 +30,7 @@ export const FIBDNDGameData: FIBDNDDataInterface[] = [
 	},
 	{
 		id: 1,
-		question: ["The", null, "is", "yellow.", "The", null, "is", "red"],
+		question: ["The", null, "is", "yellow.", "The", null, "is", "red."],
 		answers: [
 			{
 				index: 0,

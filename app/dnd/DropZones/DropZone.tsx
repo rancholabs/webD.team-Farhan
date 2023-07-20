@@ -10,7 +10,7 @@ import {
 
 type Props = DropZoneInterface & { slideIndex: number };
 
-const DropZone = ({ index, color, slideIndex }: Props) => {
+const DropZone = ({ dropZoneIndex, color, slideIndex }: Props) => {
 	const DNDGameData = useAppSelector(getDNDGameData);
 	const reset = DNDGameData[slideIndex].reset;
 	const dispatch = useAppDispatch();
@@ -32,7 +32,7 @@ const DropZone = ({ index, color, slideIndex }: Props) => {
 			setDNDDropZones({
 				slideIndex: slideIndex,
 				submittedAnswer: {
-					dropZoneIndex: index,
+					dropZoneIndex: dropZoneIndex,
 					answer: answer,
 				},
 			})

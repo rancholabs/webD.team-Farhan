@@ -4,42 +4,42 @@ export const DragAndDropGameData: DNDGameDataInterface[] = [
 	{
 		dropZones: [
 			{
-				index: 1,
+				dropZoneIndex: 1,
 				coordinates: "top-[10px] left-[110px]",
 				color: null,
 			},
 			{
-				index: 2,
+				dropZoneIndex: 2,
 				coordinates: "top-[10px] left-[340px]",
 				color: null,
 			},
 			{
-				index: 3,
+				dropZoneIndex: 3,
 				coordinates: "top-[70px] left-[790px]",
 				color: null,
 			},
 			{
-				index: 4,
+				dropZoneIndex: 4,
 				coordinates: "top-[310px] left-[790px]",
 				color: null,
 			},
 			{
-				index: 5,
+				dropZoneIndex: 5,
 				coordinates: "top-[400px] left-[790px]",
 				color: null,
 			},
 			{
-				index: 6,
+				dropZoneIndex: 6,
 				coordinates: "top-[480px] left-[250px]",
 				color: null,
 			},
 			{
-				index: 7,
+				dropZoneIndex: 7,
 				coordinates: "top-[480px] left-[480px]",
 				color: null,
 			},
 			{
-				index: 8,
+				dropZoneIndex: 8,
 				coordinates: "top-[480px] left-[710px]",
 				color: null,
 			},
@@ -126,22 +126,22 @@ export const DragAndDropGameData: DNDGameDataInterface[] = [
 	{
 		dropZones: [
 			{
-				index: 1,
+				dropZoneIndex: 1,
 				coordinates: "top-[10px] left-[110px]",
 				color: null,
 			},
 			{
-				index: 2,
+				dropZoneIndex: 2,
 				coordinates: "top-[10px] left-[340px]",
 				color: null,
 			},
 			{
-				index: 3,
+				dropZoneIndex: 3,
 				coordinates: "top-[70px] left-[790px]",
 				color: null,
 			},
 			{
-				index: 4,
+				dropZoneIndex: 4,
 				coordinates: "top-[310px] left-[790px]",
 				color: null,
 			},

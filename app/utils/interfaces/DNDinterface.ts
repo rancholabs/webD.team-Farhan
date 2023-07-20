@@ -4,7 +4,7 @@ export interface DroppableItemInterface {
 }
 
 export interface DropZoneInterface {
-	index: number;
+	dropZoneIndex: number;
 	coordinates: string;
 	color: string | null;
 }

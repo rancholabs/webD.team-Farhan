@@ -26,9 +26,9 @@ const DropZonesContainer = ({ slideIndex }: Props) => {
 				return (
 					<div
 						className={`absolute ${item.coordinates}`}
-						key={item.index}>
+						key={item.dropZoneIndex}>
 						<DropZone
-							index={item.index}
+							dropZoneIndex={item.dropZoneIndex}
 							coordinates={item.coordinates}
 							color={item.color}
 							slideIndex={slideIndex}
