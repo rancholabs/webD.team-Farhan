@@ -2,14 +2,14 @@
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-### Prerequisites
+## Prerequisites
 
 Make sure you have the following software installed on your system:
 
 - [Node.js](https://nodejs.org/en/download/) (at least version 12.x or higher)
 - [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
 
-### Clone the Repository
+## Clone the Repository
 
 First, clone this repository to your local machine using the following command:
 
