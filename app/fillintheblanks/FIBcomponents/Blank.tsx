@@ -1,8 +1,10 @@
 "use client";
 import React, { InputHTMLAttributes, useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../redux Toolkit/hooks";
-import { setFIBanswers } from "../../redux Toolkit/slice/FIBSlice";
-import { RootState } from "../../redux Toolkit/store";
+import {
+	getFIBGameData,
+	setFIBanswers,
+} from "@/app/redux Toolkit/slice/FIBSlice";
 
 type Props = {
 	index: number;
@@ -12,12 +14,11 @@ type Props = {
 const Blank = ({ index, slideIndex }: Props) => {
 	const dispatch = useAppDispatch();
 	const [word, setWord] = useState("");
-	const { hasreset } = useAppSelector((state: RootState) => state.FIBSlice);
-
+	const FIBGameData = useAppSelector(getFIBGameData);
+	const hasreset = FIBGameData[slideIndex].hasreset;
 	useEffect(() => {
 		if (hasreset) {
 			setWord("");
-			// dispatch(setHasReset({ hasreset: false }));
 			return;
 		}
 	}, [hasreset]);
@@ -33,7 +34,10 @@ const Blank = ({ index, slideIndex }: Props) => {
 				dispatch(
 					setFIBanswers({
 						slideIndex,
-						answerSubmitted: { index: index, answer: word },
+						submittedAnswers: {
+							index: index,
+							answer: word,
+						},
 					})
 				);
 			}}

@@ -1,22 +1,6 @@
-export interface FIBDataInterface {
-	id: number;
-	question: (string | null)[];
-	answers: {
-		index: number;
-		answer: string;
-	}[];
-	submittedAnswers: {
-		index: number;
-		answer: string;
-	}[];
-	validationFIB: {
-		score: number;
-		correct: number;
-		wrong: number;
-	};
-}
+import { FIBGameDataInterface } from "../interfaces/FIBinterface";
 
-export const FIBGameData: FIBDataInterface[] = [
+export const FIBGameData: FIBGameDataInterface[] = [
 	{
 		id: 0,
 		question: ["The", null, "is", "red"],
@@ -27,6 +11,9 @@ export const FIBGameData: FIBDataInterface[] = [
 			correct: 0,
 		},
 		submittedAnswers: [],
+		error: "",
+		hasreset: false,
+		hasSubmitted: false,
 	},
 	{
 		id: 1,
@@ -47,5 +34,8 @@ export const FIBGameData: FIBDataInterface[] = [
 			correct: 0,
 		},
 		submittedAnswers: [],
+		error: "",
+		hasreset: false,
+		hasSubmitted: false,
 	},
 ];

@@ -65,7 +65,7 @@ const ValidationDiv = ({ slideIndex }: Props) => {
 						);
 					}}
 				/>
-				<span>{error}</span>
+				{error && <span className="text-red-500">{error}</span>}
 			</div>
 		</div>
 	);

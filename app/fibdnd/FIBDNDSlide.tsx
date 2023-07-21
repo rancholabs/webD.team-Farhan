@@ -88,7 +88,7 @@ const FIBDNDSlide = ({ slideIndex }: Props) => {
 					/>
 				</div>
 			</div>
-			<span>{error}</span>
+			{error && <span className="text-red-500">{error}</span>}
 		</div>
 	);
 };

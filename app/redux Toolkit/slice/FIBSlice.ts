@@ -1,18 +1,14 @@
-import { FIBDataInterface, FIBGameData } from "@/app/fillintheblanks/FIBData";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../store";
-import { stat } from "fs";
+import { FIBGameDataInterface } from "@/app/utils/interfaces/FIBinterface";
+import { FIBGameData } from "@/app/utils/data/FIBData";
 
 interface initialState {
-	FIBGameData: FIBDataInterface[];
-	error: string;
-	hasreset: boolean;
+	FIBGameData: FIBGameDataInterface[];
 }
 
 const initialState: initialState = {
 	FIBGameData,
-	error: "",
-	hasreset: false,
 };
 
 const FIBSlice = createSlice({
@@ -23,30 +19,28 @@ const FIBSlice = createSlice({
 			state,
 			action: PayloadAction<{
 				slideIndex: number;
-				answerSubmitted: {
+				submittedAnswers: {
 					index: number;
 					answer: string;
 				};
 			}>
 		) => {
-			const { slideIndex, answerSubmitted } = action.payload;
-			// check if the answer is already present in the submitted answers array using the index
-			// if present then replace the answer
-			// else push the answer
-			if (answerSubmitted.answer === "") return;
+			const { slideIndex, submittedAnswers } = action.payload;
+			if (submittedAnswers.answer === "") return;
 			const index = state.FIBGameData[
 				slideIndex
 			].submittedAnswers.findIndex(
-				(answer) => answer.index === answerSubmitted.index
+				(answer) => answer.index === submittedAnswers.index
 			);
 			if (index !== -1) {
 				state.FIBGameData[slideIndex].submittedAnswers[index] =
-					answerSubmitted;
+					submittedAnswers;
 			} else {
 				state.FIBGameData[slideIndex].submittedAnswers.push(
-					answerSubmitted
+					submittedAnswers
 				);
 			}
+			state.FIBGameData[slideIndex].hasreset = false;
 		},
 		checkFIBanswers: (
 			state,
@@ -54,25 +48,18 @@ const FIBSlice = createSlice({
 		) => {
 			const { slideIndex } = action.payload;
 			const { submittedAnswers, answers } = state.FIBGameData[slideIndex];
-			if (submittedAnswers.length !== answers.length) {
-				state.error = "Please fill all the blanks";
-				return;
-			}
 
-			// check if the submitted answers are matching with the answers
-			// if yes then update the score and correct answers
-			// else update the score and wrong answers
 			let score = 0;
 			let correct = 0;
 			let wrong = 0;
-			submittedAnswers.forEach((answer) => {
+			submittedAnswers.forEach((submittedAnswer) => {
 				const index = answers.findIndex(
-					(ans) => ans.index === answer.index
+					(ans) => ans.index === submittedAnswer.index
 				);
 				if (index !== -1) {
 					if (
 						answers[index].answer.toLowerCase() ===
-						answer.answer.toLowerCase()
+						submittedAnswer.answer.toLowerCase()
 					) {
 						score += 1;
 						correct += 1;
@@ -86,26 +73,37 @@ const FIBSlice = createSlice({
 				correct,
 				wrong,
 			};
+			state.FIBGameData[slideIndex].hasSubmitted = true;
 		},
 		resetFIBGame: (
 			state,
 			action: PayloadAction<{ slideIndex: number }>
 		) => {
 			const { slideIndex } = action.payload;
+			state.FIBGameData[slideIndex].hasreset = true;
 			state.FIBGameData[slideIndex].submittedAnswers = [];
-			state.FIBGameData[slideIndex].validationFIB = {
+			let Validation = {
 				score: 0,
 				correct: 0,
 				wrong: 0,
 			};
-			state.hasreset = true;
+			state.FIBGameData[slideIndex].validationFIB = Validation;
+			state.FIBGameData[slideIndex].hasSubmitted = false;
+			state.FIBGameData[slideIndex].error = "";
+		},
+		setFIBError: (
+			state,
+			action: PayloadAction<{ slideIndex: number; error: string }>
+		) => {
+			const { slideIndex, error } = action.payload;
+			state.FIBGameData[slideIndex].error = error;
 		},
 	},
 });
 
-export const getFIBData = (state: RootState) => state.FIBSlice.FIBGameData;
+export const getFIBGameData = (state: RootState) => state.FIBSlice.FIBGameData;
 
-export const { setFIBanswers, checkFIBanswers, resetFIBGame } =
+export const { setFIBanswers, checkFIBanswers, resetFIBGame, setFIBError } =
 	FIBSlice.actions;
 
 export default FIBSlice;

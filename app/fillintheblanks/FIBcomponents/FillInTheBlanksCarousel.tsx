@@ -2,13 +2,13 @@
 import React, { useState } from "react";
 import FillInTheBlanksSlide from "./FillInTheBlanksSlide";
 import { useAppSelector } from "@/app/redux Toolkit/hooks";
-import { getFIBData } from "@/app/redux Toolkit/slice/FIBSlice";
 import CarouselContext from "@/app/utils/context/CarouselContext";
+import { getFIBGameData } from "@/app/redux Toolkit/slice/FIBSlice";
 
 type Props = {};
 
 const FillInTheBlanksCarousel = (props: Props) => {
-	const FIBGameData = useAppSelector(getFIBData);
+	const FIBGameData = useAppSelector(getFIBGameData);
 	const [[currentSlide, direction], setCurrentSlide] = useState([0, 0]);
 
 	return (
@@ -17,14 +17,7 @@ const FillInTheBlanksCarousel = (props: Props) => {
 			currentSlide={currentSlide}
 			setCurrentSlide={setCurrentSlide}
 			direction={direction}>
-			<FillInTheBlanksSlide
-				slideIndex={currentSlide}
-				question={FIBGameData[currentSlide].question}
-				answers={FIBGameData[currentSlide].answers}
-				id={FIBGameData[currentSlide].id}
-				validationFIB={FIBGameData[currentSlide].validationFIB}
-				submittedAnswers={FIBGameData[currentSlide].submittedAnswers}
-			/>
+			<FillInTheBlanksSlide slideIndex={currentSlide} />
 		</CarouselContext>
 	);
 };

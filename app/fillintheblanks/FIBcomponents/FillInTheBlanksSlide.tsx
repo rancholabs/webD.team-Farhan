@@ -2,22 +2,28 @@
 import React, { useState } from "react";
 import Blank from "./Blank";
 import { useAppDispatch, useAppSelector } from "@/app/redux Toolkit/hooks";
-import { FIBDataInterface } from "../FIBData";
 import {
 	checkFIBanswers,
-	getFIBData,
+	getFIBGameData,
 	resetFIBGame,
+	setFIBError,
 } from "@/app/redux Toolkit/slice/FIBSlice";
+import SubmitButton from "@/app/utils/components/SubmitButton";
+import ResetButton from "@/app/utils/components/ResetButton";
 
-type Props = FIBDataInterface & { slideIndex: number };
+type Props = { slideIndex: number };
 
-const FillInTheBlanksSlide = ({ question, slideIndex }: Props) => {
+const FillInTheBlanksSlide = ({ slideIndex }: Props) => {
 	const dispatch = useAppDispatch();
-	const FIBGamedata = useAppSelector(getFIBData);
+	const FIBGamedata = useAppSelector(getFIBGameData);
+	const question = FIBGamedata[slideIndex].question;
+	const score = FIBGamedata[slideIndex].validationFIB.score;
+	const hasSubmitted = FIBGamedata[slideIndex].hasSubmitted;
+	const error = FIBGamedata[slideIndex].error;
 	let blankIndex = 0;
 	return (
 		<div className="w-full h-full p-10 flex flex-col justify-center items-center gap-5">
-			<div>Score : {FIBGamedata[slideIndex].validationFIB.score}</div>
+			<div>Score : {score}</div>
 			<div className="flex p-10 bg-slate-200/30 rounded-xl shadow-2xl shadow-gray-400">
 				{question?.map((word, index) => {
 					// set blankIndex to blankIndex + 1 whenever a null found
@@ -40,21 +46,35 @@ const FillInTheBlanksSlide = ({ question, slideIndex }: Props) => {
 				})}
 			</div>
 			<div className="w-full flex justify-center gap-5 items-center">
-				<button
-					onClick={() => {
-						dispatch(checkFIBanswers({ slideIndex: slideIndex }));
-					}}
-					className="bg-slate-500 text-white px-5 py-2 rounded-md">
-					Submit
-				</button>
-				<button
-					onClick={() => {
-						dispatch(resetFIBGame({ slideIndex: slideIndex }));
-					}}
-					className="bg-slate-500 text-white px-5 py-2 rounded-md ml-5">
-					Reset
-				</button>
+				<div className="w-1/2 flex gap-5">
+					<SubmitButton
+						hasSubmitted={hasSubmitted}
+						onClick={() => {
+							if (
+								FIBGamedata[slideIndex].answers.length !==
+								FIBGamedata[slideIndex].submittedAnswers.length
+							) {
+								dispatch(
+									setFIBError({
+										slideIndex,
+										error: "Please fill all the blanks",
+									})
+								);
+								return;
+							}
+							dispatch(
+								checkFIBanswers({ slideIndex: slideIndex })
+							);
+						}}
+					/>
+					<ResetButton
+						onClick={() => {
+							dispatch(resetFIBGame({ slideIndex: slideIndex }));
+						}}
+					/>
+				</div>
 			</div>
+			{error && <span className="text-red-500">{error}</span>}
 		</div>
 	);
 };
