@@ -1,11 +1,9 @@
 "use client";
+import { FIBDNDDroppableItemInterface } from "@/app/utils/interfaces/FIBDNDInterface";
 import React from "react";
 import { useDrag } from "react-dnd";
 
-type Props = {
-	index: number;
-	name: string;
-};
+type Props = FIBDNDDroppableItemInterface;
 
 const DroppableItem = ({ name }: Props) => {
 	const [{ isDragging }, drag] = useDrag(() => ({
@@ -15,6 +13,7 @@ const DroppableItem = ({ name }: Props) => {
 			isDragging: !!monitor.isDragging(),
 		}),
 	}));
+
 	return (
 		<div
 			className="px-3 py-2 flex justify-center items-center bg-slate-600 text-white cursor-pointer font-semibold

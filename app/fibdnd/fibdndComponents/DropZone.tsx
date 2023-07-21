@@ -1,7 +1,7 @@
 "use client";
 import { useAppDispatch, useAppSelector } from "@/app/redux Toolkit/hooks";
 import {
-	getFIBDNDGameReset,
+	getFIBDNDGameData,
 	setFIBDNDanswers,
 } from "@/app/redux Toolkit/slice/FIBDndSlice";
 import React, { useEffect, useState } from "react";
@@ -13,35 +13,39 @@ type Props = {
 };
 
 const DropZone = ({ index, slideIndex }: Props) => {
-	const hasReset = useAppSelector(getFIBDNDGameReset);
+	const FIBDNDGameData = useAppSelector(getFIBDNDGameData);
+	const reset = FIBDNDGameData[slideIndex].reset;
 	const dispatch = useAppDispatch();
 	const [word, setWord] = useState<string>("");
 	const [{ isOver }, drop] = useDrop({
 		accept: "card",
-		drop: (item: any) => {
-			addItemToBoard(item.answer);
+		drop: ({ answer }: any) => {
+			addItemToBoard(answer);
+			setWord(answer);
 		},
 		collect: (monitor) => ({
 			isOver: !!monitor.isOver(),
 		}),
 	});
 
-	const addItemToBoard = (answer: any) => {
-		setWord(answer);
+	const addItemToBoard = (answer: string) => {
 		dispatch(
 			setFIBDNDanswers({
-				slideIndex,
-				answerSubmitted: { index: index, answer: answer },
+				slideIndex: slideIndex,
+				answerSubmitted: {
+					dropZoneIndex: index,
+					answer: answer,
+				},
 			})
 		);
 	};
 
 	useEffect(() => {
-		if (hasReset) {
+		if (reset) {
 			setWord("");
 			return;
 		}
-	}, [hasReset]);
+	}, [reset]);
 
 	return (
 		<>

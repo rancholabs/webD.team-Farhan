@@ -1,21 +1,31 @@
-export interface DroppableItemInterface {
+export interface FIBDNDDroppableItemInterface {
 	index: number;
 	name: string;
 }
+
+export interface FIBDNDDropZoneInterface {
+	dropZoneIndex: number;
+	color: string | null;
+}
+
 export interface FIBDNDDataInterface {
-	id: number;
+	dropZones: FIBDNDDropZoneInterface[];
+	droppableItems: FIBDNDDroppableItemInterface[];
 	question: (string | null)[];
 	answers: {
-		index: number;
+		dropZoneIndex: number;
 		answer: string;
 	}[];
 	submittedAnswers: {
-		index: number;
+		dropZoneIndex: number;
 		answer: string;
 	}[];
-	validationFIB: {
+	validationFIBDND: {
 		score: number;
 		correct: number;
 		wrong: number;
 	};
+	reset: boolean;
+	hasSubmitted: boolean;
+	error: string;
 }

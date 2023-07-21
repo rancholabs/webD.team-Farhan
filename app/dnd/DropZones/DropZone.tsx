@@ -27,7 +27,6 @@ const DropZone = ({ dropZoneIndex, color, slideIndex }: Props) => {
 	});
 
 	const addItemToBoard = (answer: string) => {
-		console.log("answer", answer);
 		dispatch(
 			setDNDDropZones({
 				slideIndex: slideIndex,

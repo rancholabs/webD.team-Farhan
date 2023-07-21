@@ -17,14 +17,7 @@ const FibDndCarousel = (props: Props) => {
 			currentSlide={currentSlide}
 			setCurrentSlide={setCurrentSlide}
 			direction={direction}>
-			<FIBDNDSlide
-				slideIndex={currentSlide}
-				question={FIBDNDGameData[currentSlide].question}
-				answers={FIBDNDGameData[currentSlide].answers}
-				id={FIBDNDGameData[currentSlide].id}
-				validationFIB={FIBDNDGameData[currentSlide].validationFIB}
-				submittedAnswers={FIBDNDGameData[currentSlide].submittedAnswers}
-			/>
+			<FIBDNDSlide slideIndex={currentSlide} />
 		</CarouselContext>
 	);
 };

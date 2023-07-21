@@ -43,25 +43,6 @@ const DndSlice = createSlice({
 			}
 			state.DragAndDropGameData[slideIndex].reset = false;
 		},
-		resetDNDDropZones: (
-			state,
-			action: PayloadAction<{ slideIndex: number }>
-		) => {
-			const { slideIndex } = action.payload;
-			state.DragAndDropGameData[slideIndex].reset = true;
-			state.DragAndDropGameData[slideIndex].submittedAnswers = [];
-			let Validation = {
-				score: 0,
-				correct: 0,
-				wrong: 0,
-			};
-			state.DragAndDropGameData[slideIndex].Validation = Validation;
-			state.DragAndDropGameData[slideIndex].hasSubmitted = false;
-			state.DragAndDropGameData[slideIndex].error = "";
-			state.DragAndDropGameData[slideIndex].dropZones.map(
-				(dropZone) => (dropZone.color = "")
-			);
-		},
 		checkDNDScore: (
 			state,
 			action: PayloadAction<{ slideIndex: number }>
@@ -86,7 +67,6 @@ const DndSlice = createSlice({
 							state.DragAndDropGameData[slideIndex].dropZones[
 								submittedAnswer.dropZoneIndex - 1
 							].color = "text-green-500";
-							console.log("correct");
 						} else {
 							wrong += 1;
 							// change the colour of the dropzone to red
@@ -103,6 +83,25 @@ const DndSlice = createSlice({
 				wrong,
 			};
 			state.DragAndDropGameData[slideIndex].hasSubmitted = true;
+		},
+		resetDNDDropZones: (
+			state,
+			action: PayloadAction<{ slideIndex: number }>
+		) => {
+			const { slideIndex } = action.payload;
+			state.DragAndDropGameData[slideIndex].reset = true;
+			state.DragAndDropGameData[slideIndex].submittedAnswers = [];
+			let Validation = {
+				score: 0,
+				correct: 0,
+				wrong: 0,
+			};
+			state.DragAndDropGameData[slideIndex].Validation = Validation;
+			state.DragAndDropGameData[slideIndex].hasSubmitted = false;
+			state.DragAndDropGameData[slideIndex].error = "";
+			state.DragAndDropGameData[slideIndex].dropZones.map(
+				(dropZone) => (dropZone.color = "")
+			);
 		},
 		setDNDError: (
 			state,

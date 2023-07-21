@@ -22,7 +22,6 @@ const ValidationDiv = ({ slideIndex }: Props) => {
 	const error = DNDGameData[slideIndex].error;
 
 	const submithandler = () => {
-		console.log("clicked");
 		if (
 			DNDGameData[slideIndex].submittedAnswers.length <
 			DNDGameData[slideIndex].answers.length

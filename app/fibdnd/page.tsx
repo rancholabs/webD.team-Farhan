@@ -1,5 +1,5 @@
 import React from "react";
-import FibDndCarousel from "./fibdndComponents/FibDndCarousel";
+import FibDndCarousel from "./FibDndCarousel";
 import DndProviderContext from "../utils/context/DndProviderContext";
 
 type Props = {};

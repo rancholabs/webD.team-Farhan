@@ -1,17 +1,14 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../store";
-import { FIBDNDDataInterface, FIBDNDGameData } from "@/app/fibdnd/FIBDNDData";
+import { FIBDNDDataInterface } from "@/app/utils/interfaces/FIBDNDInterface";
+import { FIBDNDGameData } from "@/app/utils/data/FIBDNDData";
 
 interface initialState {
 	FIBDNDGameData: FIBDNDDataInterface[];
-	error: string;
-	hasreset: boolean;
 }
 
 const initialState: initialState = {
 	FIBDNDGameData: FIBDNDGameData,
-	error: "",
-	hasreset: false,
 };
 
 const FIBDndSlice = createSlice({
@@ -23,20 +20,18 @@ const FIBDndSlice = createSlice({
 			action: PayloadAction<{
 				slideIndex: number;
 				answerSubmitted: {
-					index: number;
+					dropZoneIndex: number;
 					answer: string;
 				};
 			}>
 		) => {
 			const { slideIndex, answerSubmitted } = action.payload;
-			// check if the answer is already present in the submitted answers array using the index
-			// if present then replace the answer
-			// else push the answer
 			if (answerSubmitted.answer === "") return;
 			const index = state.FIBDNDGameData[
 				slideIndex
 			].submittedAnswers.findIndex(
-				(answer) => answer.index === answerSubmitted.index
+				(answer) =>
+					answer.dropZoneIndex === answerSubmitted.dropZoneIndex
 			);
 			if (index !== -1) {
 				state.FIBDNDGameData[slideIndex].submittedAnswers[index] =
@@ -46,7 +41,7 @@ const FIBDndSlice = createSlice({
 					answerSubmitted
 				);
 			}
-			state.hasreset = false;
+			state.FIBDNDGameData[slideIndex].reset = false;
 		},
 		checkFIBDNDanswers: (
 			state,
@@ -55,25 +50,18 @@ const FIBDndSlice = createSlice({
 			const { slideIndex } = action.payload;
 			const { submittedAnswers, answers } =
 				state.FIBDNDGameData[slideIndex];
-			if (submittedAnswers.length !== answers.length) {
-				state.error = "Please fill all the blanks";
-				return;
-			}
 
-			// check if the submitted answers are matching with the answers
-			// if yes then update the score and correct answers
-			// else update the score and wrong answers
 			let score = 0;
 			let correct = 0;
 			let wrong = 0;
-			submittedAnswers.forEach((answer) => {
+			submittedAnswers.forEach((submittedAnswer) => {
 				const index = answers.findIndex(
-					(ans) => ans.index === answer.index
+					(ans) => ans.dropZoneIndex === submittedAnswer.dropZoneIndex
 				);
 				if (index !== -1) {
 					if (
 						answers[index].answer.toLowerCase() ===
-						answer.answer.toLowerCase()
+						submittedAnswer.answer.toLowerCase()
 					) {
 						score += 1;
 						correct += 1;
@@ -82,35 +70,47 @@ const FIBDndSlice = createSlice({
 					}
 				}
 			});
-			state.FIBDNDGameData[slideIndex].validationFIB = {
+			state.FIBDNDGameData[slideIndex].validationFIBDND = {
 				score,
 				correct,
 				wrong,
 			};
+			state.FIBDNDGameData[slideIndex].hasSubmitted = true;
 		},
 		resetFIBDNDGame: (
 			state,
 			action: PayloadAction<{ slideIndex: number }>
 		) => {
 			const { slideIndex } = action.payload;
+			state.FIBDNDGameData[slideIndex].reset = true;
 			state.FIBDNDGameData[slideIndex].submittedAnswers = [];
-			state.FIBDNDGameData[slideIndex].validationFIB = {
+			let Validation = {
 				score: 0,
 				correct: 0,
 				wrong: 0,
 			};
-			state.hasreset = true;
+			state.FIBDNDGameData[slideIndex].validationFIBDND = Validation;
+			state.FIBDNDGameData[slideIndex].hasSubmitted = false;
+			state.FIBDNDGameData[slideIndex].error = "";
+		},
+		setFIBDNDError: (
+			state,
+			action: PayloadAction<{ slideIndex: number; error: string }>
+		) => {
+			const { slideIndex, error } = action.payload;
+			state.FIBDNDGameData[slideIndex].error = error;
 		},
 	},
 });
 
-export const { setFIBDNDanswers, checkFIBDNDanswers, resetFIBDNDGame } =
-	FIBDndSlice.actions;
+export const {
+	setFIBDNDanswers,
+	checkFIBDNDanswers,
+	resetFIBDNDGame,
+	setFIBDNDError,
+} = FIBDndSlice.actions;
 
 export const getFIBDNDGameData = (state: RootState) =>
 	state.FIBDNDSlice.FIBDNDGameData;
-export const getFIBDNDGameError = (state: RootState) => state.FIBDNDSlice.error;
-export const getFIBDNDGameReset = (state: RootState) =>
-	state.FIBDNDSlice.hasreset;
 
 export default FIBDndSlice;
