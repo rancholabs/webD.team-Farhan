@@ -6,6 +6,7 @@ const nextConfig = {
 			"picsum.photos",
 			"png.pngtree.com",
 			"i.pinimg.com",
+			"media.tenor.com",
 		],
 	},
 	loaders: [

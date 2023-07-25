@@ -81,6 +81,8 @@ const CarGameActivityTwo = ({
 		setRotateCarAntiClockWise(true);
 	};
 
+	console.log("col", col);
+
 	return (
 		<div>
 			<div className={`flex h-screen ${showPopUp && ""}`}>
