@@ -140,7 +140,9 @@ const CarGameActivityTwo = ({
 							row > 8 ? "py-0" : "py-5"
 						} h-[59%] sm:h-[53%] xl:h-[60%] 2xl:h-[67%]`}>
 						<div
-							className={`grid grid-cols-${col} gap-0 mx-auto my-auto`}>
+							className={`grid grid-cols-${
+								col ? col : 5
+							} gap-0 mx-auto my-auto`}>
 							<GameMatrix
 								row={row}
 								col={col}
